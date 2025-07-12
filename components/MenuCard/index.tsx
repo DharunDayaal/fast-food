@@ -10,7 +10,6 @@ const MenuCard = ({
 }) => {
     const imageUrl = `${image_url}?project=${appWriteConfig.projectId}`;
 
-    console.log("Image URL", image_url);
     return (
         <TouchableOpacity
             className="menu-card"

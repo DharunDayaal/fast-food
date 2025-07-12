@@ -1,7 +1,7 @@
 import CartButton from "@/components/CartButton";
 import Filter from "@/components/Filter";
 import SearchBar from "@/components/SearchBar";
-// import MenuCard from "@/components/MenuCard";
+import MenuCard from "@/components/MenuCard"
 import useAppwrite from "@/hooks/useAppWrite";
 import { getCategories, getMenu } from "@/lib/appwrite";
 import { Category, MenuItem } from "@/type";
@@ -10,8 +10,6 @@ import { useLocalSearchParams } from "expo-router";
 import React, { lazy, Suspense, useEffect } from "react";
 import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const MenuCard = lazy(() => import("@/components/MenuCard"))
 
 export default function Search() {
     const { category, query } = useLocalSearchParams<{
@@ -49,9 +47,7 @@ export default function Search() {
                                 !isFirstRightColItem ? "mt-10" : "mt-0"
                             )}
                         >
-                            <Suspense fallback={<Text>No results</Text>}>
                                 <MenuCard item={item as MenuItem} />
-                            </Suspense>
                         </View>
                     );
                 }}
