@@ -1,5 +1,6 @@
 import { CreateUserParams, GetMenuParams, SignInParams } from "@/type"
-import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite"
+import mime from 'mime'
+import { Account, Avatars, Client, Databases, ID, Permission, Query, Role, Storage } from "react-native-appwrite"
 
 export const appWriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
@@ -107,6 +108,54 @@ export const getCategories = async () => {
             appWriteConfig.categoriesCollectionId
         )
         return categories.documents;
+    } catch (error) {
+        throw new Error(error as string)
+    }
+}
+
+export const uploadImageToStorage = async (uri: string) => {
+    try {
+        const fileName = uri?.split('/').pop() || `avatar_${Date.now()}`;
+        const fileType = mime.getType(uri) || 'image/jpeg';
+
+        const file = {
+            uri,
+            name: fileName,
+            type: fileType,
+            size: 12
+        };
+
+        const response = await storage.createFile(
+            appWriteConfig.bucketId,
+            ID.unique(),
+            file,
+            [Permission.read(Role.any())]
+        );
+
+        return response;
+    } catch (error) {
+        throw new Error(error as string)
+    }
+}
+
+export const getAvatarUrl = async (fileId: string) => {
+    try {
+        return storage.getFileViewURL(appWriteConfig.bucketId, fileId);
+    } catch (error) {
+        throw new Error(error as string)
+    }
+};
+
+export const updateUserAvatar = async (id: string, avatarUrl: URL) => {
+    try {
+        const response = await databases.updateDocument(
+            appWriteConfig.databaseId,
+            appWriteConfig.userCollectionId,
+            id,
+            {avatar: avatarUrl}
+        )
+
+        return response
     } catch (error) {
         throw new Error(error as string)
     }
