@@ -1,4 +1,5 @@
-import { CreateUserParams, GetMenuParams, SignInParams } from "@/type"
+import useAuthStore from "@/store/authStore"
+import { CreateUserParams, GetMenuParams, SignInParams, UpdateProfileParams, User } from "@/type"
 import mime from 'mime'
 import { Account, Avatars, Client, Databases, ID, Permission, Query, Role, Storage } from "react-native-appwrite"
 
@@ -158,5 +159,19 @@ export const updateUserAvatar = async (id: string, avatarUrl: URL) => {
         return response
     } catch (error) {
         throw new Error(error as string)
+    }
+}
+
+export const updateUser = async (id: string, data: UpdateProfileParams) => {
+    try {
+        const response = await databases.updateDocument(
+            appWriteConfig.databaseId,
+            appWriteConfig.userCollectionId,
+            id,
+            data
+        )
+
+    } catch (error) {
+        throw new Error(error as string);
     }
 }

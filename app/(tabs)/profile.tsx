@@ -1,21 +1,32 @@
+import Button from "@/components/Button";
 import Header from "@/components/Header";
+import ProfileInput from "@/components/ProfileInput";
 import { images } from "@/constants";
 import {
     appWriteConfig,
     getAvatarUrl,
+    updateUser,
     updateUserAvatar,
     uploadImageToStorage,
 } from "@/lib/appwrite";
 import useAuthStore from "@/store/authStore";
+import { UpdateProfileParams } from "@/type";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Profile() {
-    const [image, setImage] = useState<string | null>(null);
-
     const { user } = useAuthStore();
+    console.log("User------------------------------------", user);
+    const [image, setImage] = useState<string | null>(null);
+    const [formData, setFormData] = useState<UpdateProfileParams>({
+        name: (user?.name.trim() as string) || "",
+        email: (user?.email.trim() as string) || "",
+        phone_number: (user?.phone_number.trim() as string) || "",
+        address: (user?.address.trim() as string) || "",
+    });
+    const [isEditable, setIsEditable] = useState(false);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,15 +46,28 @@ export default function Profile() {
                     result.assets[0].uri
                 );
                 const avatarUrl = await getAvatarUrl(uplodedFile.$id);
-                if (user) await updateUserAvatar(user?.$id, avatarUrl); // to check with the use of promise.all() reduce the latency and time issue
+                if (user) await updateUserAvatar(user?.$id, avatarUrl);
             }
         } catch (error) {
             throw new Error(error as string);
         }
     };
 
+    const handleToggle = () => {
+        setIsEditable(!isEditable);
+    };
+
+    const handleSaveProfile = async () => {
+        try {
+            await updateUser(user?.$id as string, formData);
+            setIsEditable(false);
+        } catch (error) {
+            console.log("Error updating profile:", error);
+        }
+    };
+
     return (
-        <SafeAreaView className="p-6 bg-fuchsia-300 flex-1">
+        <SafeAreaView className="p-6 flex-1">
             <Header title="Profile" />
             <View className="items-center flex-row justify-center">
                 <View className="relative">
@@ -58,7 +82,7 @@ export default function Profile() {
                         resizeMode="cover"
                     />
                     <TouchableOpacity
-                        className="bg-primary rounded-full p-1 absolute right-1 bottom-0 border-white border border-1"
+                        className="bg-primary rounded-full p-1 absolute right-1 bottom-0 border-neutral-50 border border-1"
                         onPress={pickImage}
                     >
                         <Image
@@ -69,6 +93,59 @@ export default function Profile() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <View className="flex-col gap-y-2 mt-12">
+                <ProfileInput
+                    label="Full Name"
+                    value={formData.name}
+                    placeholder="Enter Name"
+                    editable={isEditable}
+                    onChangeText={(text) =>
+                        setFormData((prev) => ({ ...prev, name: text }))
+                    }
+                    icon={images.user}
+                />
+                <ProfileInput
+                    label="Email"
+                    value={formData.email}
+                    placeholder="Enter email"
+                    keyboardType="email-address"
+                    editable={isEditable}
+                    onChangeText={(text) =>
+                        setFormData((prev) => ({ ...prev, email: text }))
+                    }
+                    icon={images.envelope}
+                />
+                <ProfileInput
+                    label="Phone Number"
+                    value={formData.phone_number}
+                    placeholder="Enter phone number"
+                    keyboardType="phone-pad"
+                    editable={isEditable}
+                    onChangeText={(text) =>
+                        setFormData((prev) => ({ ...prev, phone_number: text }))
+                    }
+                    icon={images.phone}
+                />
+                <ProfileInput
+                    label="Address"
+                    value={formData.address}
+                    placeholder="Enter address"
+                    editable={isEditable}
+                    onChangeText={(text) =>
+                        setFormData((prev) => ({ ...prev, address: text }))
+                    }
+                    icon={images.location}
+                />
+            </View>
+            <Button title="Edit Profile" onPress={handleToggle} />
+            {isEditable && (
+                <Button
+                    title="Save Profile"
+                    style="mt-6 bg-neutral-200"
+                    textStyle="text-[#FE8C00] text-bold"
+                    onPress={handleSaveProfile}
+                />
+            )}
         </SafeAreaView>
     );
 }
