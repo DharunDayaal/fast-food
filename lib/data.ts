@@ -35,7 +35,7 @@ const dummyData = {
     menu: [
         {
             name: "Classic Cheeseburger",
-            description: "Beef patty, cheese, lettuce, tomato",
+            description: "A timeless favorite featuring a juicy beef patty, melted cheese, crisp lettuce, and ripe tomato — a satisfying bite that delivers classic burger comfort.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/044/844/600/large_2x/homemade-fresh-tasty-burger-with-meat-and-cheese-classic-cheese-burger-and-vegetable-ai-generated-free-png.png",
             price: 25.99,
@@ -47,7 +47,7 @@ const dummyData = {
         },
         {
             name: "Pepperoni Pizza",
-            description: "Loaded with cheese and pepperoni slices",
+            description: "A cheesy, flavor-packed delight topped with sizzling pepperoni slices and a golden crust, making every slice a perfect balance of crunch and gooey indulgence.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/023/742/417/large_2x/pepperoni-pizza-isolated-illustration-ai-generative-free-png.png",
             price: 30.99,
@@ -65,7 +65,7 @@ const dummyData = {
         },
         {
             name: "Bean Burrito",
-            description: "Stuffed with beans, rice, salsa",
+            description: "A hearty vegetarian wrap loaded with seasoned beans, fluffy rice, and zesty salsa — perfect for those craving bold flavors in a comforting form.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/055/133/581/large_2x/deliciously-grilled-burritos-filled-with-beans-corn-and-fresh-vegetables-served-with-lime-wedge-and-cilantro-isolated-on-transparent-background-free-png.png",
             price: 20.99,
@@ -77,7 +77,7 @@ const dummyData = {
         },
         {
             name: "BBQ Bacon Burger",
-            description: "Smoky BBQ sauce, crispy bacon, cheddar",
+            description: "Bold and smoky, this burger layers crispy bacon, cheddar cheese, and BBQ sauce over a tender beef patty — a mouthwatering combination of sweet and savory.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/060/236/245/large_2x/a-large-hamburger-with-cheese-onions-and-lettuce-free-png.png",
             price: 27.5,
@@ -89,7 +89,7 @@ const dummyData = {
         },
         {
             name: "Chicken Caesar Wrap",
-            description: "Grilled chicken, lettuce, Caesar dressing",
+            description: "Tender grilled chicken meets crunchy lettuce and creamy Caesar dressing, all wrapped up for a light yet flavorful bite on the go.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/048/930/603/large_2x/caesar-wrap-grilled-chicken-isolated-on-transparent-background-free-png.png",
             price: 21.5,
@@ -101,7 +101,7 @@ const dummyData = {
         },
         {
             name: "Grilled Veggie Sandwich",
-            description: "Roasted veggies, pesto, cheese",
+            description: "A savory medley of roasted vegetables, melted cheese, and fresh pesto, sandwiched in grilled sesame bread for a wholesome, vegetarian treat.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/047/832/012/large_2x/grilled-sesame-seed-bread-veggie-sandwich-with-tomato-and-onion-free-png.png",
             price: 19.99,
@@ -113,7 +113,7 @@ const dummyData = {
         },
         {
             name: "Double Patty Burger",
-            description: "Two juicy beef patties and cheese",
+            description: "Double the meat, double the flavor — this burger stacks two juicy beef patties with melted cheese and all the fixings for a rich, filling meal.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/060/359/627/large_2x/double-cheeseburger-with-lettuce-tomatoes-cheese-and-sesame-bun-free-png.png",
             price: 32.99,
@@ -131,7 +131,7 @@ const dummyData = {
         },
         {
             name: "Paneer Tikka Wrap",
-            description: "Spicy paneer, mint chutney, veggies",
+            description: "Spicy paneer cubes and fresh veggies wrapped with mint chutney for a delicious Indian fusion that’s creamy, tangy, and satisfying.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/057/913/530/large_2x/delicious-wraps-a-tantalizing-array-of-wraps-filled-with-vibrant-vegetables-succulent-fillings-and-fresh-ingredients-artfully-arranged-for-a-mouthwatering-culinary-experience-free-png.png",
             price: 23.99,
@@ -143,7 +143,7 @@ const dummyData = {
         },
         {
             name: "Mexican Burrito Bowl",
-            description: "Rice, beans, corn, guac, salsa",
+            description: "A vibrant bowl of seasoned rice, beans, sweet corn, guacamole, and salsa — fresh, flavorful, and packed with plant-based goodness.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/057/466/374/large_2x/healthy-quinoa-bowl-with-avocado-tomato-and-black-beans-ingredients-free-png.png",
             price: 26.49,
@@ -155,7 +155,7 @@ const dummyData = {
         },
         {
             name: "Spicy Chicken Sandwich",
-            description: "Crispy chicken, spicy sauce, pickles",
+            description: "Crispy chicken smothered in spicy sauce with crunchy pickles — a fiery kick in a soft bun for those who love heat with their meat.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/051/814/008/large_2x/a-grilled-chicken-sandwich-with-lettuce-and-tomatoes-free-png.png",
             price: 24.99,
@@ -173,7 +173,7 @@ const dummyData = {
         },
         {
             name: "Classic Margherita Pizza",
-            description: "Tomato, mozzarella, fresh basil",
+            description: "Simple yet divine — fresh basil, tomato sauce, and mozzarella over a perfectly baked crust create a timeless Italian favorite.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/058/700/845/large_2x/free-isolated-on-transparent-background-delicious-pizza-topped-with-fresh-tomatoes-basil-and-melted-cheese-perfect-for-food-free-png.png",
             price: 26.99,
@@ -185,7 +185,7 @@ const dummyData = {
         },
         {
             name: "Protein Power Bowl",
-            description: "Grilled chicken, quinoa, veggies",
+            description: "A protein-packed bowl of grilled chicken, quinoa, and mixed veggies — ideal for fueling your day with clean, balanced nutrition.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/056/106/379/large_2x/top-view-salad-with-chicken-avocado-tomatoes-and-lettuce-free-png.png",
             price: 29.99,
@@ -197,7 +197,7 @@ const dummyData = {
         },
         {
             name: "Paneer Burrito",
-            description: "Paneer cubes, spicy masala, rice, beans",
+            description: "This Indian-inspired burrito is bursting with spicy paneer, rice, and beans — a fusion of bold spices and creamy textures wrapped to perfection.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/056/565/254/large_2x/burrito-with-cauliflower-and-vegetables-free-png.png",
             price: 24.99,
@@ -209,7 +209,7 @@ const dummyData = {
         },
         {
             name: "Chicken Club Sandwich",
-            description: "Grilled chicken, lettuce, cheese, tomato",
+            description: "Layered with grilled chicken, lettuce, tomato, and cheese, this classic club delivers a satisfying crunch and rich flavor in every bite.",
             image_url:
                 "https://static.vecteezy.com/system/resources/previews/060/364/135/large_2x/a-flavorful-club-sandwich-with-turkey-bacon-and-fresh-vegetables-sliced-and-isolated-on-a-transparent-background-free-png.png",
             price: 27.49,
