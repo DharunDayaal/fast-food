@@ -1,15 +1,26 @@
 import CartButton from "@/components/CartButton";
 import Filter from "@/components/Filter";
+import MenuCard from "@/components/MenuCard";
 import SearchBar from "@/components/SearchBar";
-import MenuCard from "@/components/MenuCard"
+import { images } from "@/constants";
 import useAppwrite from "@/hooks/useAppWrite";
 import { getCategories, getMenu } from "@/lib/appwrite";
 import { Category, MenuItem } from "@/type";
 import clsx from "clsx";
 import { useLocalSearchParams } from "expo-router";
-import React, { lazy, Suspense, useEffect } from "react";
-import { FlatList, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+const NotFoundComponent = () => {
+    return (
+        <View className="items-center justify-center flex-col gap-y-3">
+            <Image source={images.searchNotFound} resizeMode="cover" />
+            <Text className="paragraph-bold">Nothing matched your search</Text>
+            <Text className="text-gray-300">Try a different search term or check for typos.</Text>
+        </View>
+    );
+};
 
 export default function Search() {
     const { category, query } = useLocalSearchParams<{
@@ -47,7 +58,7 @@ export default function Search() {
                                 !isFirstRightColItem ? "mt-10" : "mt-0"
                             )}
                         >
-                                <MenuCard item={item as MenuItem} />
+                            <MenuCard item={item as MenuItem} />
                         </View>
                     );
                 }}
@@ -74,7 +85,7 @@ export default function Search() {
                         <Filter categories={categories as Category[]} />
                     </View>
                 )}
-                ListEmptyComponent={() => !loading && <Text>No results</Text>}
+                ListEmptyComponent={() => !loading && <NotFoundComponent />}
             />
         </SafeAreaView>
     );

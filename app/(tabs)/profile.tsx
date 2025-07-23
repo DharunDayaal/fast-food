@@ -5,11 +5,11 @@ import { images } from "@/constants";
 import {
     appWriteConfig,
     getAvatarUrl,
-    logOut,
     updateUser,
     updateUserAvatar,
     uploadImageToStorage,
 } from "@/lib/appwrite";
+import { logOut } from "@/lib/authAction";
 import useAuthStore from "@/store/authStore";
 import { UpdateProfileParams } from "@/type";
 import * as ImagePicker from "expo-image-picker";
@@ -19,7 +19,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Profile() {
     const { user } = useAuthStore();
-    console.log("User------------------------------------", user);
     const [image, setImage] = useState<string | null>(null);
     const [formData, setFormData] = useState<UpdateProfileParams>({
         name: (user?.name.trim() as string) || "",
@@ -69,11 +68,11 @@ export default function Profile() {
 
     const handleLogout = async () => {
         try {
-            await logOut()
+            await logOut();
         } catch (error) {
             throw new Error(error as string);
         }
-    }
+    };
 
     return (
         <SafeAreaView className="p-6 flex-1">

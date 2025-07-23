@@ -1,5 +1,4 @@
-import useAuthStore from "@/store/authStore"
-import { CreateUserParams, GetMenuParams, SignInParams, UpdateProfileParams, User } from "@/type"
+import { CreateUserParams, GetMenuParams, SignInParams, UpdateProfileParams } from "@/type"
 import mime from 'mime'
 import { Account, Avatars, Client, Databases, ID, Permission, Query, Role, Storage } from "react-native-appwrite"
 
@@ -176,13 +175,16 @@ export const updateUser = async (id: string, data: UpdateProfileParams) => {
     }
 }
 
-export const logOut = async () => {
+export const getMenuItemDetails = async (id: string) => {
     try {
-        await account.deleteSession("current");
-        const { setIsAuthenticated, setUser } = useAuthStore.getState();
-        setIsAuthenticated(false);
-        setUser(null);
+        const response = await databases.getDocument(
+            appWriteConfig.databaseId,
+            appWriteConfig.menuCollectionId,
+            id
+        )
+
+        return response;
     } catch (error) {
-        throw new Error(error as string)
+        throw new Error(error as string);
     }
 }
