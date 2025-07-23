@@ -175,3 +175,14 @@ export const updateUser = async (id: string, data: UpdateProfileParams) => {
         throw new Error(error as string);
     }
 }
+
+export const logOut = async () => {
+    try {
+        await account.deleteSession("current");
+        const { setIsAuthenticated, setUser } = useAuthStore.getState();
+        setIsAuthenticated(false);
+        setUser(null);
+    } catch (error) {
+        throw new Error(error as string)
+    }
+}

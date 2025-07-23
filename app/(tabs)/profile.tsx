@@ -5,6 +5,7 @@ import { images } from "@/constants";
 import {
     appWriteConfig,
     getAvatarUrl,
+    logOut,
     updateUser,
     updateUserAvatar,
     uploadImageToStorage,
@@ -65,6 +66,14 @@ export default function Profile() {
             console.log("Error updating profile:", error);
         }
     };
+
+    const handleLogout = async () => {
+        try {
+            await logOut()
+        } catch (error) {
+            throw new Error(error as string);
+        }
+    }
 
     return (
         <SafeAreaView className="p-6 flex-1">
@@ -146,6 +155,19 @@ export default function Profile() {
                     onPress={handleSaveProfile}
                 />
             )}
+            <Button
+                title="Logout"
+                style="mt-6 bg-neutral-100 border border-1 border-red-600"
+                textStyle="text-red-600 text-bold"
+                onPress={handleLogout}
+                leftIcon={
+                    <Image
+                        source={images.logout}
+                        className="size-6 mr-1"
+                        resizeMode="contain"
+                    />
+                }
+            />
         </SafeAreaView>
     );
 }
