@@ -157,7 +157,7 @@ export default function Profile() {
             <Button
                 title="Logout"
                 style="mt-6 bg-neutral-100 border border-1 border-red-600"
-                textStyle="text-red-600 text-bold"
+                textStyle="text-red-600 text-bold text-neutral-500"
                 onPress={handleLogout}
                 leftIcon={
                     <Image

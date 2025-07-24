@@ -85,8 +85,9 @@ const MenuDetailsPage = () => {
     return (
         <SafeAreaView className="flex-1 p-4">
             <View className="flex-row justify-between">
-                <Header title={menuData?.name} />
+                <Header />
             </View>
+            
         </SafeAreaView>
     );
 };

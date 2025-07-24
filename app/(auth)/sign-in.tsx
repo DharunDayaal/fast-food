@@ -4,7 +4,6 @@ import { signIn } from "@/lib/appwrite";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, Text, View } from "react-native";
-import * as Sentry from "@sentry/react-native"
 import useAuthStore from "@/store/authStore";
 
 export default function SignIn() {
@@ -30,7 +29,6 @@ export default function SignIn() {
             router.replace("/");
         } catch (error: any) {
             Alert.alert("Error", error.message);
-            Sentry.captureEvent(error)
         } finally {
             setIsSubmitting(false);
         }

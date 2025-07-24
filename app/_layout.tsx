@@ -2,27 +2,11 @@ import "./globals.css";
 import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
-import * as Sentry from '@sentry/react-native';
 import useAuthStore from "@/store/authStore";
 
-Sentry.init({
-  dsn: 'https://88b1494b6647c0893a51d223c4fe3480@o4509632340295680.ingest.de.sentry.io/4509632414089296',
-
-  // Adds more context data to events (IP address, cookies, user, etc.)
-  // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
-  sendDefaultPii: true,
-
-  // Configure Session Replay
-  replaysSessionSampleRate: 0.1,
-  replaysOnErrorSampleRate: 1,
-  integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
-
-  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
-  // spotlight: __DEV__,
-});
 
 
-export default Sentry.wrap(function RootLayout() {
+export default function RootLayout() {
 
     const { isLoading, fetchAuthenticatedUser } = useAuthStore();
 
@@ -50,4 +34,4 @@ export default Sentry.wrap(function RootLayout() {
     return (
         <Stack screenOptions={{ headerShown: false }} />
     );
-});
+}
