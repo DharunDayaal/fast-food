@@ -14,15 +14,6 @@ const MenuCard = ({
 
     const { addItem } = useCartStore();
 
-    const handleGetItemDetails = async (id: string) => {
-        console.log("Menu Id", id);
-        // try {
-        //     const response = await getMenuItemDetails(id);
-        //     console.log("Menu Item Details", JSON.stringify(response, null, 2));
-        // } catch (error) {
-        //     throw new Error(error as string);
-        // }
-    };
     return (
         <Link href={`/menu/${$id}`} asChild>
             <TouchableOpacity
