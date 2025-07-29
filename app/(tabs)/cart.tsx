@@ -1,11 +1,12 @@
 import Button from "@/components/Button";
 import CartItem from "@/components/CartItem";
 import Header from "@/components/Header";
+import { images } from "@/constants";
 import { useCartStore } from "@/store/cartStore";
 import { PaymentInfoStripeProps } from "@/type";
 import clsx from "clsx";
 import React from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const PaymentInfoStripe = ({
@@ -46,7 +47,13 @@ export default function Cart() {
                 keyExtractor={(item) => item.id}
                 contentContainerClassName="pb-28 px-5 pt-5"
                 ListHeaderComponent={() => <Header title="Your Cart" />}
-                ListEmptyComponent={() => <Text>Cart Empty</Text>}
+                ListEmptyComponent={() => (
+                    <View className="items-center justify-center flex-col gap-y-3">
+                                <Image source={images.searchNotFound} resizeMode="cover" />
+                                <Text className="paragraph-bold">No items in your cart</Text>
+                                <Text className="text-gray-300">Go to search page and add items to your cart</Text>
+                            </View>
+                )}
                 ListFooterComponent={() =>
                     totalItems > 0 && (
                         <View className="gap-5">

@@ -1,12 +1,15 @@
+import Button from "@/components/Button";
 import CustomizationSection from "@/components/CustomizationSection";
 import DeliverySection from "@/components/DeliverySection";
 import Header from "@/components/Header";
 import NutrientComponent from "@/components/NutrientComponent";
 import Rating from "@/components/Rating";
+import { images } from "@/constants";
 import { appWriteConfig, getMenuItemDetails } from "@/lib/appwrite";
+import { useCartStore } from "@/store/cartStore";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Customization {
@@ -67,7 +70,10 @@ interface MenuItem {
 const MenuDetailsPage = () => {
     const { id } = useLocalSearchParams();
 
+    const { getTotalPrice, increaseQty, decreaseQty, getTotalItems, addItem } = useCartStore();
     const [menuData, setMenuData] = useState<MenuItem | null>(null);
+    const totalPrice = getTotalPrice();
+    const totalItems = getTotalItems();
 
     useEffect(() => {
         const fetchMenuData = async (id: string) => {
@@ -147,6 +153,37 @@ const MenuDetailsPage = () => {
                 Customizations
             </Text>
             <CustomizationSection data={menuData.menuCustomizations} />
+            <View className="absolute bottom-12 right-[14px] bg-white-100 flex flex-row justify-between items-center rounded-2xl shadow-slate-200 py-4 px-6 w-11/12">
+                <View className="flex flex-row gap-x-6 items-center">
+                    <TouchableOpacity onPress={() => decreaseQty(menuData.$id, [])}>
+                        <Image source={images.minus} className="size-4 !h-1" />
+                    </TouchableOpacity>
+                    <Text className="text-lg font-quicksand-bold font-bold">
+                        {totalItems}
+                    </Text>
+                    <TouchableOpacity onPress={() => increaseQty(menuData.$id, [])}>
+                        <Image source={images.plus} className="size-5" />
+                    </TouchableOpacity>
+                </View>
+                <Button
+                    title={`Add to Cart $${totalPrice}`}
+                    leftIcon={
+                        <Image
+                            source={images.bag}
+                            className="size-5 rounded-md"
+                        />
+                    }
+                    style="w-44 flex flex-row gap-x-2 px-4"
+                    textStyle="font-bold"
+                    onPress={() => addItem({
+                            id: menuData.$id,
+                            name: menuData.name,
+                            price: menuData.price,
+                            image_url: `${menuData.image_url}?project=${appWriteConfig.projectId}`,
+                            customizations: [],
+                        })}
+                />
+            </View>
         </SafeAreaView>
     );
 };
